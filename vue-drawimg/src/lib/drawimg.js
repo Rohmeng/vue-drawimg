@@ -18,11 +18,6 @@ var imgOptimize = {
     chooseH: 350,
     init: function () {
         imgOptimize.flipInit();
-
-        // $("#btnOptimizeImg").click(function () {
-        //     imgOptimize.uploadImg();
-        // });
-
         document.querySelectorAll(".PicPosition input").forEach(function (item, index) {
             if (index == 0) {
                 item.checked = true
@@ -45,10 +40,7 @@ var imgOptimize = {
 
     },
     open: function (src) {
-        // this.$imgObj = obj;
-        // var src = this.$imgObj.src;
         this.imgUrl = src;
-        // document.querySelector(".modal-backdrop").style.display = "block";
         this._canvas = document.getElementById("c1");
         this._cxt = this._canvas.getContext("2d");
         this._cxt.clearRect(0, 0, this._canvas.width, this._canvas.height); //先清掉画布上的内容
@@ -74,7 +66,6 @@ var imgOptimize = {
             imgOptimize._cxt.drawImage(img, imgOptimize._img_X, imgOptimize._img_Y, imgOptimize._imgWidth, imgOptimize._imgHeight);
 
         };
-        //this.setImagesData(src);
         document.querySelector(".optimize-menu li").click();
         return true;
     },
@@ -122,15 +113,9 @@ var imgOptimize = {
         $choose_box.style.left = margin_left + 'px';
         $choose_box.style.top = margin_top + 'px';
     },
-    setImagesData: function (src) { //获得所有图片
+    setImagesData: function (src) {
         var images = [];
         images.push(src);
-        // $(".goodsImg").each(function () {
-        //     var currentSrc = $(this).attr("src");
-        //     if (currentSrc != src) {
-        //         images.push(currentSrc);
-        //     }
-        // });
         this.imagesData = images;
     },
 
@@ -190,12 +175,8 @@ var imgOptimize = {
         this._cxt.drawImage(this._img, this._img_X, this._img_Y, this._imgWidth, this._imgHeight); //绘制图片
     },
     saveRotate: function () {
-        // layer.tips("应用成功！", '#btn-rotate-save', {
-        //     tips: 2
-        // });
         var imageData = this._cxt.getImageData(0, 0, this._canvas.width, this._canvas.height);
         for (var i = 0; i < imageData.data.length; i += 4) {
-            // 当该像素是透明的，则设置成白色   
             if (imageData.data[i + 3] == 0) {
                 imageData.data[i] = 255;
                 imageData.data[i + 1] = 255;
@@ -205,10 +186,8 @@ var imgOptimize = {
         }
         this._cxt.putImageData(imageData, 0, 0);
         this._img.src = this._canvas.toDataURL("image/png");
-
         this._leftCount = 0;
         this._rigthCount = 0;
-
     },
 
     flipInit: function () {
@@ -221,9 +200,7 @@ var imgOptimize = {
         this._cxt.drawImage(this._img, this._img_X, this._img_Y, this._imgWidth, this._imgHeight); //绘制图片
     },
     verticalFlip: function () {
-
         var cxt = this._cxt;
-
         cxt.clearRect(0, 0, this._canvas.width, this._canvas.height); //先清掉画布上的内容
         if (this._verticalCount == 0) {
             cxt.save();
@@ -239,11 +216,8 @@ var imgOptimize = {
 
     },
     horizontalFlip: function () {
-
         var cxt = this._cxt;
-
         cxt.clearRect(0, 0, this._canvas.width, this._canvas.height); //先清掉画布上的内容
-
         if (this._horizontalCount == 0) {
             cxt.save();
             cxt.translate(this._canvas.width, 0);
@@ -258,19 +232,14 @@ var imgOptimize = {
 
     },
     resetFlip: function () {
-
         this._verticalCount = 0;
         this._horizontalCount = 0;
         this._cxt.clearRect(0, 0, this._canvas.width, this._canvas.height); //先清掉画布上的内容
         this._cxt.drawImage(this._img, this._img_X, this._img_Y, this._imgWidth, this._imgHeight); //绘制图片
     },
     saveFlip: function () {
-        // layer.tips("应用成功！", '#btn-flip-save', {
-        //     tips: 2
-        // });
         var imageData = this._cxt.getImageData(0, 0, this._canvas.width, this._canvas.height);
         for (var i = 0; i < imageData.data.length; i += 4) {
-            // 当该像素是透明的，则设置成白色   
             if (imageData.data[i + 3] == 0) {
                 imageData.data[i] = 255;
                 imageData.data[i + 1] = 255;
@@ -280,7 +249,6 @@ var imgOptimize = {
         }
         this._cxt.putImageData(imageData, 0, 0);
         this._img.src = this._canvas.toDataURL("image/png");
-
         this._verticalCount = 0;
         this._horizontalCount = 0;
     },
@@ -367,7 +335,6 @@ var imgOptimize = {
         this._cxt.drawImage(this._img, cutX, cutY, cutWidth, cutHeight, x, y, cutWidth, cutHeight);
         var imageData = this._cxt.getImageData(0, 0, this._canvas.width, this._canvas.height);
         for (var i = 0; i < imageData.data.length; i += 4) {
-            // 当该像素是透明的，则设置成白色   
             if (imageData.data[i + 3] == 0) {
                 imageData.data[i] = 255;
                 imageData.data[i + 1] = 255;
@@ -380,22 +347,6 @@ var imgOptimize = {
         document.querySelector(".optimize-menu li").click();
     },
     puzzleInit: function () {
-        // var _this = this;
-        // this.puzzleImgHtml = '<img src="' + this._img.src + '"  style="display:inline-block;width:796px;height:796px;position:absolute;top:0;left:-140px;"  />';
-        // this.html1 = '<div class="puzzle-item puzzle-two-left"><span></span>' + this.puzzleImgHtml + '</div>' +
-        //     '<div class="puzzle-item puzzle-two-right empty"><span></span></div>';
-        // $("#puzzleContainer").html(this.html1);
-        // this.puzzleItemClick();
-        // var imgHtml = "";
-        // this.imagesData.forEach(function (src, index) {
-        //     if (index == 0) {
-        //         src = _this._img.src;
-        //     }
-        //     imgHtml += '<img class="opt-puzzle-item" src="' + src + '" />';
-        // });
-        // $(".opt-puzzle-btn").removeClass("active").eq(0).addClass("active");
-        // $("#optAsideBtn").html(imgHtml);
-        // this.puzzleBtnClick();
     },
     puzzleTypeTab: function () { 
     },
@@ -488,7 +439,6 @@ var imgOptimize = {
         if (state) {
             var imageData = this._cxt.getImageData(0, 0, this._canvas.width, this._canvas.height);
             for (var i = 0; i < imageData.data.length; i += 4) {
-                // 当该像素是透明的，则设置成白色   
                 if (imageData.data[i + 3] == 0) {
                     imageData.data[i] = 255;
                     imageData.data[i + 1] = 255;
@@ -510,10 +460,7 @@ var imgOptimize = {
         this._cxt.drawImage(this._img, this._img_X, this._img_Y, this._imgWidth, this._imgHeight); //绘制图片
     },
     label: function (state, url) {
-        // var lcanvas = document.getElementById("c5");
-        // var cxt = lcanvas.getContext("2d");
         this._cxt.clearRect(0, 0, this._canvas.width, this._canvas.height); //先清掉画布上的内容
-        //cxt.clearRect(0, 0, lcanvas.width, lcanvas.height); //先清掉画布上的内容
         // 绘制图片
         this._cxt.globalAlpha = 1.0;
         this._cxt.drawImage(this._img, this._img_X, this._img_Y, this._imgWidth, this._imgHeight); //绘制图片
@@ -563,7 +510,6 @@ var imgOptimize = {
             if (state) {
                 var imageData = imgOptimize._cxt.getImageData(0, 0, imgOptimize._canvas.width, imgOptimize._canvas.height);
                 for (var i = 0; i < imageData.data.length; i += 4) {
-                    // 当该像素是透明的，则设置成白色   
                     if (imageData.data[i + 3] == 0) {
                         imageData.data[i] = 255;
                         imageData.data[i + 1] = 255;
@@ -589,7 +535,6 @@ var imgOptimize = {
         var tempcanvas = document.getElementById("c7");
         var tempcontext = this._canvas.getContext('2d');
 
-        //获取ImageData的属性：width，height，data（包含 R G B A 四个值）；
         var imgdata = this._cxt.getImageData(0, 0, tempcanvas.width, tempcanvas.height);
         var filter = document.querySelector("#filter input[type='radio']:checked").value;
         if (!state) {
@@ -633,7 +578,6 @@ var imgOptimize = {
         if (state) {
             var imageData = this._cxt.getImageData(0, 0, this._canvas.width, this._canvas.height);
             for (var i = 0; i < imageData.data.length; i += 4) {
-                // 当该像素是透明的，则设置成白色   
                 if (imageData.data[i + 3] == 0) {
                     imageData.data[i] = 255;
                     imageData.data[i + 1] = 255;
@@ -650,59 +594,39 @@ var imgOptimize = {
         var _this = this;
         var d = _this._img.src;
         if (d.indexOf('data:image') != -1) {
-            //ZENG.msgbox.loading("正在保存优化后的图片...");
-            d = d.replace(/^data:image\/(png|jpg);base64,/, "");
-            // var savebase64img = JSON.parse(SaveUploadImg(d, 0));
-            // if (savebase64img.success == 1) {
-            //     var imgPath = savebase64img.path;
-            //     imgOptimize.$imgObj.attr("src", imgPath);
-            //     $("#pic_meihua").modal("hide");
-            // }
-            // //ZENG.msgbox.hide();
-            // var picId = imgOptimize.$imgObj.parent().parent().find("input[type='file']").attr("id");
-            // window.external.SetPicUrl(picId, imgPath);
-            //return;
+
         }
     },
     moriGirl: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //绿色滤镜的算法：当前绿色通道值G*1.4得到绿色滤镜
             var g = imgdata.data[i + 1] * 1.05;
             var a = imgdata.data[i + 3] * 0.95;
-            //注：当前值大于255时将其赋值255
             imgdata.data[i + 3] = a > 255 ? 255 : a;
             imgdata.data[i + 1] = g > 255 ? 255 : g;
         }
     },
     occident: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //蓝色滤镜的算法：当前蓝色通道值变为原来的1.6得到蓝色滤镜
             var b = imgdata.data[i + 2] * 1.05;
             var a = imgdata.data[i + 3] * 0.95;
-            //注：当前值大于255时将其赋值255
             imgdata.data[i + 2] = b > 255 ? 255 : b;
             imgdata.data[i + 3] = a > 255 ? 255 : a;
         }
     },
     koreaJapan: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //红色滤镜的算法：当前红色通道值变为原来的2得到红色滤镜
             var r = imgdata.data[i] * 1.1;
             var b = imgdata.data[i + 1] + 4;
             var a = imgdata.data[i + 3] * 0.95;
-            //注：当前值大于255时将其赋值255
             imgdata.data[i + 3] = a > 255 ? 255 : a;
-            //注：当前值大于255时将其赋值255
             imgdata.data[i] = r > 255 ? 255 : r;
 
         }
     },
     unripe: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //青色滤镜的算法：绿色通道值和蓝色通道值增加50（绿色+蓝色 = 青色）
             var g = imgdata.data[i + 1] + 10;
             var b = imgdata.data[i + 2] + 10
-            //注：当前值大于255时将其赋值255
             imgdata.data[i + 1] = g > 255 ? 255 : g;
             imgdata.data[i + 2] = b > 255 ? 255 : b;
         }
@@ -766,29 +690,23 @@ var imgOptimize = {
     },
     dawn: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //黄色滤镜的算法：红色通道值和绿色通道值增加50（红色+绿色 = 黄色）
             var r = imgdata.data[i] + 8;
             var g = imgdata.data[i + 1] + 8
-            //注：当前值大于255时将其赋值255
             imgdata.data[i] = r > 255 ? 255 : r;
             imgdata.data[i + 1] = g > 255 ? 255 : g;
         }
     },
     dusk: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //红色滤镜的算法：当前红色通道值变为原来的2得到红色滤镜
             var r = imgdata.data[i] * 1.1;
-            //注：当前值大于255时将其赋值255
             imgdata.data[i] = r > 255 ? 255 : r;
 
         }
     },
     personality: function (imgdata) {
         for (var i = 0; i < imgdata.data.length; i += 4) {
-            //紫色滤镜的算法：红色通道值和蓝色通道值增加50（红色+蓝色 = 紫色）
             var r = imgdata.data[i] + 8;
             var b = imgdata.data[i + 2] + 8
-            //注：当前值大于255时将其赋值255
             imgdata.data[i] = r > 255 ? 255 : r;
             imgdata.data[i + 2] = b > 255 ? 255 : b;
         }
@@ -798,7 +716,6 @@ var imgOptimize = {
             var r = imgdata.data[i] + 20;
             var g = imgdata.data[i + 1] + 20;
             var b = imgdata.data[i + 2] + 20;
-            //注：当前值大于255时将其赋值255
             imgdata.data[i] = r > 255 ? 255 : r;
             imgdata.data[i + 1] = g > 255 ? 255 : g;
             imgdata.data[i + 2] = b > 255 ? 255 : b;
